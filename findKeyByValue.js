@@ -6,21 +6,20 @@ const assertEqual = function(actual, expected) {
   }
 };
 
-const findKeyByValue = function(object, value){
-    for (item in object){
-      // console.log(item);
-      if (value === object[item]){
-        return item;
-      }
+const findKeyByValue = function(object, value) {
+  for (const item in object) {
+    // console.log(item);
+    if (value === object[item]) {
+      return item;
     }
-
-}
+  }
+};
 
 const bestTVShowsByGenre = {
   sci_fi : "The Expanse",
   comedy: "Brooklyn Nine-Nine",
   drama: "The Wire"
-}
+};
 
 // findKeyByValue(bestTVShowsByGenre, "The Expanse")
 console.log(assertEqual(findKeyByValue(bestTVShowsByGenre, "The Expanse"), "sci_fi"));
