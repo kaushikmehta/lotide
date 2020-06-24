@@ -31,9 +31,9 @@ const letterPositions = function(sentence){
   for (let index in sentence){
     // console.log(index);
     if (results[sentence[index]] === undefined){
-      results[sentence[index]] = [index];
+      results[sentence[index]] = [Number(index)];
     } else {
-      results[sentence[index]].push(index);
+      results[sentence[index]].push(Number(index));
     }
   }
   console.log(results);
@@ -43,7 +43,6 @@ const letterPositions = function(sentence){
 letterPositions('hello');
 
 console.log(assertArraysEqual(letterPositions('hello').h, [0]));
-
-// console.log(assertArraysEqual(letterPositions('hello').e, [1]));
-// console.log(assertArraysEqual(letterPositions('hello').l, [2,3]));
-// console.log(assertArraysEqual(letterPositions('hello').o, [4]));
+console.log(assertArraysEqual(letterPositions('hello').e, [1]));
+console.log(assertArraysEqual(letterPositions('hello').l, [2,3]));
+console.log(assertArraysEqual(letterPositions('hello').o, [4]));
