@@ -28,11 +28,22 @@ const eqArrays = function(array1, array2){
 
 const letterPositions = function(sentence){
   const results = {};
-  
+  for (let index in sentence){
+    // console.log(index);
+    if (results[sentence[index]] === undefined){
+      results[sentence[index]] = [index];
+    } else {
+      results[sentence[index]].push(index);
+    }
+  }
+  console.log(results);
   return results;
 };
 
-console.log(assertArraysEqual([letterPositions('hello')['h'], [0]]));
-console.log(assertArraysEqual([letterPositions('hello')['e'], [1]]));
-console.log(assertArraysEqual([letterPositions('hello')['l'], [2, 3]]));
-console.log(assertArraysEqual([letterPositions('hello')['0'], [4]]));
+letterPositions('hello');
+
+console.log(assertArraysEqual(letterPositions('hello').h, [0]));
+
+// console.log(assertArraysEqual(letterPositions('hello').e, [1]));
+// console.log(assertArraysEqual(letterPositions('hello').l, [2,3]));
+// console.log(assertArraysEqual(letterPositions('hello').o, [4]));
