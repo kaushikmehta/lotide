@@ -1,61 +1,59 @@
 const assertObjectsEqual = function(actual, expected) {
-  if (actual === expected) {
-    return `✅✅✅ Assertion Passed: ${actual} === ${expected}`;
+  const inspect = require('util').inspect; // <= add this line
+  if (eqObjects(actual, expected)) {
+    console.log(`✅✅✅ Assertion Passed: ${inspect(actual)} === ${inspect(expected)}`);
   } else {
-    return `🛑🛑🛑 Assertion Failed: ${actual} !==  ${expected}`;
+    console.log(`🛑🛑🛑 Assertion Failed: ${inspect(actual)} !==  ${inspect(expected)}`);
   }
 };
 
-const eqArrays = function (array1, array2) {
+const eqArrays = function(array1, array2){
   if (array1.length === array2.length) {
     let value = true
     for (let i = 0; i < array1.length; i++) {
-      if (array1[i] !== array2[i]) {
+      if (array1[i] !== array2[i]){
         value = false
       }
     }
     return value;
   } else {
-    value =  false
+    return false;
   }
-  return value
 };
 
 const eqObjects = function (object1, object2) {
-  let value = false;
   let keys1 = Object.keys(object1);
   let keys2 = Object.keys(object2);
 
-  if (keys1.length !== keys2.length) return value;
+  if (keys1.length !== keys2.length) return false;
 
   for (key1 of keys1) {
     const firstVal = object1[key1];
     const secVal = object2[key1];
     if (Array.isArray(object1[key1]) && Array.isArray(object2[key1])) {
-      value = eqArrays(object1[key1], object2[key1]);
-      // value = true;
-
+      if(!eqArrays(object1[key1], object2[key1])){
+        return false
+      };
     } else {
       if (object1[key1] !== object2[key1]){
-        value = false;
-      } else {
-        value = true;
+        return false
       }
     }
   };
-  return value;
+  return true;;
 };
+
 
 const ab = { a: "1", b: "2" };
 const ba = { b: "2", a: "1" };
-console.log(assertObjectsEqual(eqObjects(ab, ba), true)); // => true
+assertObjectsEqual(ab, ba); // => true
 
 const abc = { a: "1", b: "2", c: "3" };
-console.log(assertObjectsEqual(eqObjects(ab, abc), false)); // => false
+assertObjectsEqual(ab, abc); // => false
 
 const cd = { c: "1", d: ["2", 3] };
 const dc = { d: ["2", 3], c: "1" };
-console.log(assertObjectsEqual(eqObjects(cd, dc), true)); // => true
+assertObjectsEqual(cd, dc); // => true
 
 const cd2 = { c: "1", d: ["2", 3, 4] };
-console.log(assertObjectsEqual(eqObjects(cd, cd2), false)); // => false
+assertObjectsEqual(cd, cd2); // => false

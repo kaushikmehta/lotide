@@ -1,4 +1,4 @@
-const assertArraysEqual = function(array1, array2){
+const eqArrays = function(array1, array2){
   if (array1.length === array2.length) {
     let value = true
     for (let i = 0; i < array1.length; i++) {
@@ -6,9 +6,18 @@ const assertArraysEqual = function(array1, array2){
         value = false
       }
     }
-    value === false ? console.log("🛑 The two arrays are same in size but not equal") : console.log("✅ The two arrays are equal");
+    return value;
   } else {
-    console.log("The two arrays are different sizes and therefore not equal");
+    return false;
+  }
+};
+
+
+const assertArraysEqual = function(actual, expected){
+  if (eqArrays(actual, expected)) {
+    console.log(`✅✅✅ Assertion Passed: ${actual} === ${expected}`);
+  } else {
+    console.log(`🛑🛑🛑 Assertion Failed: ${actual} !==  ${expected}`);
   }
 };
 
