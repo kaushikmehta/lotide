@@ -1,4 +1,4 @@
-const assertArraysEqual = function(array1, array2){
+const eqArrays = function(array1, array2){
   if (array1.length === array2.length) {
     let value = true
     for (let i = 0; i < array1.length; i++) {
@@ -6,11 +6,20 @@ const assertArraysEqual = function(array1, array2){
         value = false
       }
     }
-    value === false ? console.log("🛑 The two arrays are same in size but not equal") : console.log("✅ The two arrays are equal");
+    return value;
   } else {
-    console.log("The two arrays are different sizes and therefore not equal");
+    return false;
   }
 };
+
+const assertArraysEqual = function(actual, expected){
+  if (eqArrays(actual, expected)) {
+    console.log(`✅✅✅ Assertion Passed: ${actual} === ${expected}`);
+  } else {
+    console.log(`🛑🛑🛑 Assertion Failed: ${actual} !==  ${expected}`);
+  }
+};
+
 
 const words = ["ground", "control", "to", "major", "tom"];
 
@@ -22,5 +31,16 @@ const map = function(array, callback){
   return results;
 };
 
+// checking first letter of word
 const results1 = map(words, word => word[0]);
-console.log(results1);
+assertArraysEqual(results1, [ 'g', 'c', 't', 'm', 't' ]);
+
+// checking length of word
+const results2 = map(words, word => word.length);
+assertArraysEqual(results2, [ 6, 7, 2, 5, 3 ]);
+
+// checking last letter of word
+const results3 = map(words, word => word[word.length -1]);
+assertArraysEqual(results3, [ 'd', 'l', 'o', 'r', 'm' ]);
+
+
