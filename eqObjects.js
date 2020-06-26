@@ -34,20 +34,17 @@ const eqObjects = function (object1, object2) {
       if(!eqArrays(object1[key1], object2[key1])){
         return false
       };
-    } else {
-      if (typeof firstVal === "object" && typeof secVal === "object" ){
+    } else if (typeof firstVal === "object" && typeof secVal === "object" ){
           return eqObjects(firstVal, secVal);
       } else if (object1[key1] !== object2[key1]){
         return false
       }
-    } // else 
   };
   return true;;
 };
 assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true); // => true
 assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false); // => false
 assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false); // => false
-
 
 // const ab = { a: "1", b: "2" };
 // const ba = { b: "2", a: "1" };
