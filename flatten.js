@@ -13,6 +13,3 @@ const flatten = function (nestedArray) {
 }
 
 module.exports = flatten;
-
-const assertArraysEqual = require("./assertArraysEqual");
-console.log(flatten([1, 2, [3, 4], 5, [6]]));
